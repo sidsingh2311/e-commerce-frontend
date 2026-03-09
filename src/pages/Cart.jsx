@@ -34,7 +34,7 @@ const Cart = ({ location, getLocation }) => {
               >
                 <div className="flex items-center gap-4">
                   <img
-                    src={Array.isArray(item.images) ? item.images[0] : item.images}
+                    src={item.thumbnail || (Array.isArray(item.images) ? item.images[0] : item.images)}
                     alt={item.title}
                     className="w-20 h-20 rounded-md object-cover"
                   />
@@ -83,7 +83,7 @@ const Cart = ({ location, getLocation }) => {
 
           {/* Checkout Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-20">
-            
+
             {/* Delivery Info */}
             <div className="bg-gray-100 rounded-md p-7 mt-4 space-y-2">
               <h1 className="text-gray-800 font-bold text-xl">

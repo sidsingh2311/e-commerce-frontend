@@ -9,19 +9,19 @@ import { useCart } from '../context/CartContext'
 import { HiMenuAlt1, HiMenuAlt3 } from 'react-icons/hi'
 import ResponsiveMenu from "./ResponsiveMenu"
 
-const Navbar = ({location,getLocation,openDropdown,setOpenDropdown}) => { 
+const Navbar = ({ location, geoLocation, openDropdown, setOpenDropdown }) => {
 
     // get the cart details using the cart context api
-    const {cartItem} = useCart();
-    const {openNav,setOpenNav} = useState(false);
+    const { cartItem } = useCart();
+    const [openNav, setOpenNav] = useState(false);
     // making a function for toogle down 
     // if toggledown is true or open set it false
     const toggleDropdown = () => {
-      setOpenDropdown(!openDropdown);
+        setOpenDropdown(!openDropdown);
     }
 
-  return (   
-            <div className='bg-white py-3 shadow-2xl px-4 md:px-0'>
+    return (
+        <div className='bg-white py-3 shadow-2xl px-4 md:px-0'>
             <div className='max-w-6xl mx-auto flex justify-between items-center'>
                 {/* logo section */}
                 <div className='flex gap-7 items-center'>
@@ -32,12 +32,12 @@ const Navbar = ({location,getLocation,openDropdown,setOpenDropdown}) => {
                             <p>{location.county}</p>
                             <p>{location.state}</p>
                         </div> : "Add Address"}</span>
-                        <FaCaretDown onClick={toggleDropdown}/>
+                        <FaCaretDown onClick={toggleDropdown} />
                     </div>
                     {
                         openDropdown ? <div className='w-[250px] h-max shadow-2xl z-50 bg-white fixed top-16 left-60 border-2 p-5 border-gray-100 rounded-md'>
-                         <h1 className='font-semibold mb-4 text-xl flex justify-between'>Change Location <span onClick={toggleDropdown}><CgClose/></span></h1>
-                         <button onClick={getLocation} className='bg-blue-500 text-white px-3 py-1 rounded-md cursor-pointer hover:bg-blue-400'>Detect my location</button>
+                            <h1 className='font-semibold mb-4 text-xl flex justify-between'>Change Location <span onClick={toggleDropdown}><CgClose /></span></h1>
+                            <button onClick={geoLocation} className='bg-blue-500 text-white px-3 py-1 rounded-md cursor-pointer hover:bg-blue-400'>Detect my location</button>
                         </div> : null
                     }
                 </div>
@@ -55,22 +55,22 @@ const Navbar = ({location,getLocation,openDropdown,setOpenDropdown}) => {
                     </Link>
                     <div className='hidden md:block'>
                         <SignedOut>
-                            <SignInButton className="bg-blue-500 text-white px-3 py-1 rounded-md cursor-pointer"/>
+                            <SignInButton className="bg-blue-500 text-white px-3 py-1 rounded-md cursor-pointer" />
                         </SignedOut>
                         <SignedIn>
                             <UserButton />
                         </SignedIn>
                     </div>
                     {
-                        openNav ? <HiMenuAlt3 onClick={()=>setOpenNav(false)} className='h-7 w-7 md:hidden'/>:<HiMenuAlt1 
-                        onClick={()=>setOpenNav(true)}
-                        className='h-7 w-7 md:hidden'/>
+                        openNav ? <HiMenuAlt3 onClick={() => setOpenNav(false)} className='h-7 w-7 md:hidden' /> : <HiMenuAlt1
+                            onClick={() => setOpenNav(true)}
+                            className='h-7 w-7 md:hidden' />
                     }
                 </nav>
             </div>
-            <ResponsiveMenu openNav={openNav} setOpenNav={setOpenNav}/>
+            <ResponsiveMenu openNav={openNav} setOpenNav={setOpenNav} />
         </div>
-  )
+    )
 }
 
 export default Navbar
